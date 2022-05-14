@@ -205,13 +205,14 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the exit tool strip menu item1 click.
+        /// Ons the exit tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
-        private void OnExitToolStripMenuItem1Click(object sender, EventArgs e)
+        private void OnExitToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Close program
+            this.Close();
         }
     }
 }

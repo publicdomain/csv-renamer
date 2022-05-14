@@ -129,7 +129,7 @@ namespace CSVrenamer
 			this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
 			this.exitToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
 			this.exitToolStripMenuItem1.Text = "E&xit";
-			this.exitToolStripMenuItem1.Click += new System.EventHandler(this.OnExitToolStripMenuItem1Click);
+			this.exitToolStripMenuItem1.Click += new System.EventHandler(this.OnExitToolStripMenuItemClick);
 			// 
 			// optionsToolStripMenuItem
 			// 
