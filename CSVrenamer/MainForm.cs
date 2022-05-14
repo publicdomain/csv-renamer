@@ -54,7 +54,7 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnItemsListViewDragEnter(object sender, DragEventArgs e)
         {
-            // TODO Add code
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
         }
 
         /// <summary>
