@@ -35,7 +35,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the items list view drag drop.
+        /// Handles the items list view drag drop.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -45,7 +45,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the items list view drag enter.
+        /// Handles the items list view drag enter.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -55,7 +55,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the items list view mouse down.
+        /// Handles the items list view mouse down.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -65,7 +65,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the items list view mouse move.
+        /// Handles the items list view mouse move.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -75,7 +75,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the items list view mouse up.
+        /// Handles the items list view mouse up.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -85,7 +85,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the new tool strip menu item1 click.
+        /// Handles the new tool strip menu item1 click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -95,7 +95,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the reset tool strip menu item click.
+        /// Handles the reset tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -105,7 +105,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the options tool strip menu item drop down item clicked.
+        /// Handles the options tool strip menu item drop down item clicked.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -115,7 +115,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the free releases public domainis tool strip menu item click.
+        /// Handles the free releases public domainis tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -125,7 +125,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the original thread donation codercom tool strip menu item click.
+        /// Handles the original thread donation codercom tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -135,7 +135,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the source code githubcom tool strip menu item click.
+        /// Handles the source code githubcom tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -145,7 +145,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the about tool strip menu item click.
+        /// Handles the about tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -155,7 +155,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the hyphen button click.
+        /// Handles the hyphen button click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -165,7 +165,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the underscore button click.
+        /// Handles the underscore button click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -175,7 +175,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the separator combo box text changed.
+        /// Handles the separator combo box text changed.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -185,7 +185,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the spaced check box checked changed.
+        /// Handles the spaced check box checked changed.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -195,7 +195,7 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the rename button click.
+        /// Handles the rename button click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
@@ -205,7 +205,25 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Ons the exit tool strip menu item click.
+        /// Loads the settings file.
+        /// </summary>
+        /// <returns>The settings file.</returns>
+        /// <param name="settingsFilePath">Settings file path.</param>
+        private SettingsData LoadSettingsFile(string settingsFilePath)
+        {
+            // Use file stream
+            using (FileStream fileStream = File.OpenRead(settingsFilePath))
+            {
+                // Set xml serialzer
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(SettingsData));
+
+                // Return populated settings data
+                return xmlSerializer.Deserialize(fileStream) as SettingsData;
+            }
+        }
+
+        /// <summary>
+        /// Handles the exit tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
