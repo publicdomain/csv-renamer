@@ -44,7 +44,18 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnItemsListViewDragDrop(object sender, DragEventArgs e)
         {
-            // TODO Add code
+            // Files or directories
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // Add dropped items
+                foreach (var item in (string[])e.Data.GetData(DataFormats.FileDrop))
+                {
+                    this.itemsListView.Items.Add(item);
+                }
+
+                // Update count
+                this.itemsCountToolStripStatusLabel.Text = this.itemsListView.Items.Count.ToString();
+            }
         }
 
         /// <summary>
