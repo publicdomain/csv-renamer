@@ -263,6 +263,26 @@ namespace CSVrenamer
         }
 
         /// <summary>
+        /// Ons the remove tool strip menu item click.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        private void OnRemoveToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            // Prevent drawing
+            this.itemsListView.BeginUpdate();
+
+            // Remove selected items
+            foreach (ListViewItem item in this.itemsListView.SelectedItems)
+            {
+                this.itemsListView.Items.Remove(item);
+            }
+
+            // Resume drawing
+            this.itemsListView.EndUpdate();
+        }
+
+        /// <summary>
         /// Handles the exit tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
