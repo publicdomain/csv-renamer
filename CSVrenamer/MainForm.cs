@@ -95,7 +95,35 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnItemsListViewMouseUp(object sender, MouseEventArgs e)
         {
-            // TODO Add code
+            if (listViewItem != null)
+            {
+                try
+                {
+                    ListViewItem destinationListViewItem = this.itemsListView.GetItemAt(0, Math.Min(e.Y, this.itemsListView.Items[this.itemsListView.Items.Count - 1].GetBounds(ItemBoundsPortion.Entire).Bottom - 1));
+
+                    if (destinationListViewItem != null)
+                    {
+                        Rectangle rectangle = destinationListViewItem.GetBounds(ItemBoundsPortion.Entire);
+
+                        bool insertBefore = (e.Y < rectangle.Top + (rectangle.Height / 2));
+
+                        if (listViewItem != destinationListViewItem)
+                        {
+                            this.itemsListView.Items.Remove(listViewItem);
+
+                            this.itemsListView.Items.Insert(destinationListViewItem.Index + (insertBefore ? 0 : 1), listViewItem);
+                        }
+
+                        this.itemsListView.Invalidate();
+                    }
+                }
+                finally
+                {
+                    listViewItem = null;
+
+                    Cursor = Cursors.Default;
+                }
+            }
         }
 
         /// <summary>
