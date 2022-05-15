@@ -75,7 +75,7 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnItemsListViewMouseDown(object sender, MouseEventArgs e)
         {
-            // TODO Add code
+            listViewItem = this.itemsListView.GetItemAt(e.X, e.Y);
         }
 
         /// <summary>
