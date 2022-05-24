@@ -366,8 +366,14 @@ namespace CSVrenamer
                 this.itemsListView.Items.Remove(item);
             }
 
+            // Adjust column width^M
+            this.itemsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
             // Resume drawing
             this.itemsListView.EndUpdate();
+
+            // Update count
+            this.itemsCountToolStripStatusLabel.Text = this.itemsListView.Items.Count.ToString();
         }
 
         /// <summary>
