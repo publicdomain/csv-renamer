@@ -295,7 +295,17 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnSpacedCheckBoxCheckedChanged(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Check if must add spaces
+            if (this.spacedCheckBox.Checked)
+            {
+                // Add spaces
+                this.separatorComboBox.Text = $" {this.separatorComboBox.Text} ";
+            }
+            else
+            {
+                // Remove spaces
+                this.separatorComboBox.Text = this.separatorComboBox.Text.Trim(' ');
+            }
         }
 
         /// <summary>
