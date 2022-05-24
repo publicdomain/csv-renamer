@@ -47,11 +47,20 @@ namespace CSVrenamer
             // Files or directories
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
+                // Prevent drawing
+                this.itemsListView.BeginUpdate();
+
                 // Add dropped items
                 foreach (string item in (string[])e.Data.GetData(DataFormats.FileDrop))
                 {
                     this.itemsListView.Items.Add(item);
                 }
+
+                // Adjust column width
+                this.itemsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                // Resume drawing
+                this.itemsListView.EndUpdate();
 
                 // Update count
                 this.itemsCountToolStripStatusLabel.Text = this.itemsListView.Items.Count.ToString();
