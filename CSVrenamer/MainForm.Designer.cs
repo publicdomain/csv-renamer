@@ -52,11 +52,13 @@ namespace CSVrenamer
         	this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
         	this.itemsToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
         	this.itemsCountToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-        	this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-        	this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+        	this.separatorTextToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+        	this.separatorToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
         	this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
         	this.itemsListView = new System.Windows.Forms.ListView();
         	this.itemsColumnHeader = new System.Windows.Forms.ColumnHeader();
+        	this.itemsListViewContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+        	this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.constantLabel = new System.Windows.Forms.Label();
         	this.separatorLabel = new System.Windows.Forms.Label();
         	this.vairableLabel = new System.Windows.Forms.Label();
@@ -70,14 +72,12 @@ namespace CSVrenamer
         	this.hyphenButton = new System.Windows.Forms.Button();
         	this.underscoreButton = new System.Windows.Forms.Button();
         	this.separatorComboBox = new System.Windows.Forms.ComboBox();
-        	this.itemsListViewContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-        	this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         	this.mainMenuStrip.SuspendLayout();
         	this.mainStatusStrip.SuspendLayout();
         	this.mainTableLayoutPanel.SuspendLayout();
+        	this.itemsListViewContextMenuStrip.SuspendLayout();
         	((System.ComponentModel.ISupportInitialize)(this.variableNumericUpDown)).BeginInit();
         	this.separatorTableLayoutPanel.SuspendLayout();
-        	this.itemsListViewContextMenuStrip.SuspendLayout();
         	this.SuspendLayout();
         	// 
         	// mainMenuStrip
@@ -211,8 +211,8 @@ namespace CSVrenamer
         	this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
         	        	        	this.itemsToolStripStatusLabel,
         	        	        	this.itemsCountToolStripStatusLabel,
-        	        	        	this.toolStripStatusLabel1,
-        	        	        	this.toolStripStatusLabel2});
+        	        	        	this.separatorTextToolStripStatusLabel,
+        	        	        	this.separatorToolStripStatusLabel});
         	this.mainStatusStrip.Location = new System.Drawing.Point(0, 421);
         	this.mainStatusStrip.Name = "mainStatusStrip";
         	this.mainStatusStrip.Size = new System.Drawing.Size(284, 22);
@@ -232,18 +232,18 @@ namespace CSVrenamer
         	this.itemsCountToolStripStatusLabel.Size = new System.Drawing.Size(14, 17);
         	this.itemsCountToolStripStatusLabel.Text = "0";
         	// 
-        	// toolStripStatusLabel1
+        	// separatorTextToolStripStatusLabel
         	// 
-        	this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-        	this.toolStripStatusLabel1.Size = new System.Drawing.Size(60, 17);
-        	this.toolStripStatusLabel1.Text = "Separator:";
+        	this.separatorTextToolStripStatusLabel.Name = "separatorTextToolStripStatusLabel";
+        	this.separatorTextToolStripStatusLabel.Size = new System.Drawing.Size(60, 17);
+        	this.separatorTextToolStripStatusLabel.Text = "Separator:";
         	// 
-        	// toolStripStatusLabel2
+        	// separatorToolStripStatusLabel
         	// 
-        	this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-        	this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-        	this.toolStripStatusLabel2.Size = new System.Drawing.Size(12, 17);
-        	this.toolStripStatusLabel2.Text = "-";
+        	this.separatorToolStripStatusLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        	this.separatorToolStripStatusLabel.Name = "separatorToolStripStatusLabel";
+        	this.separatorToolStripStatusLabel.Size = new System.Drawing.Size(12, 17);
+        	this.separatorToolStripStatusLabel.Text = "-";
         	// 
         	// mainTableLayoutPanel
         	// 
@@ -301,6 +301,20 @@ namespace CSVrenamer
         	// 
         	this.itemsColumnHeader.Text = "Items";
         	this.itemsColumnHeader.Width = 250;
+        	// 
+        	// itemsListViewContextMenuStrip
+        	// 
+        	this.itemsListViewContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+        	        	        	this.removeToolStripMenuItem});
+        	this.itemsListViewContextMenuStrip.Name = "itemsListViewContextMenuStrip";
+        	this.itemsListViewContextMenuStrip.Size = new System.Drawing.Size(118, 26);
+        	// 
+        	// removeToolStripMenuItem
+        	// 
+        	this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+        	this.removeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+        	this.removeToolStripMenuItem.Text = "&Remove";
+        	this.removeToolStripMenuItem.Click += new System.EventHandler(this.OnRemoveToolStripMenuItemClick);
         	// 
         	// constantLabel
         	// 
@@ -469,25 +483,14 @@ namespace CSVrenamer
         	this.separatorComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
         	this.separatorComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
         	this.separatorComboBox.FormattingEnabled = true;
+        	this.separatorComboBox.Items.AddRange(new object[] {
+        	        	        	"_",
+        	        	        	"-"});
         	this.separatorComboBox.Location = new System.Drawing.Point(105, 3);
         	this.separatorComboBox.Name = "separatorComboBox";
         	this.separatorComboBox.Size = new System.Drawing.Size(96, 24);
         	this.separatorComboBox.TabIndex = 5;
         	this.separatorComboBox.TextChanged += new System.EventHandler(this.OnSeparatorComboBoxTextChanged);
-        	// 
-        	// itemsListViewContextMenuStrip
-        	// 
-        	this.itemsListViewContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-        	        	        	this.removeToolStripMenuItem});
-        	this.itemsListViewContextMenuStrip.Name = "itemsListViewContextMenuStrip";
-        	this.itemsListViewContextMenuStrip.Size = new System.Drawing.Size(118, 26);
-        	// 
-        	// removeToolStripMenuItem
-        	// 
-        	this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-        	this.removeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-        	this.removeToolStripMenuItem.Text = "&Remove";
-        	this.removeToolStripMenuItem.Click += new System.EventHandler(this.OnRemoveToolStripMenuItemClick);
         	// 
         	// MainForm
         	// 
@@ -506,9 +509,9 @@ namespace CSVrenamer
         	this.mainStatusStrip.ResumeLayout(false);
         	this.mainStatusStrip.PerformLayout();
         	this.mainTableLayoutPanel.ResumeLayout(false);
+        	this.itemsListViewContextMenuStrip.ResumeLayout(false);
         	((System.ComponentModel.ISupportInitialize)(this.variableNumericUpDown)).EndInit();
         	this.separatorTableLayoutPanel.ResumeLayout(false);
-        	this.itemsListViewContextMenuStrip.ResumeLayout(false);
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
@@ -524,8 +527,8 @@ namespace CSVrenamer
         private System.Windows.Forms.CheckBox subtractCheckBox;
         private System.Windows.Forms.CheckBox spacedCheckBox;
         private System.Windows.Forms.ComboBox constantComboBox;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel separatorToolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel separatorTextToolStripStatusLabel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rememberEditsToolStripMenuItem;

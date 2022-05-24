@@ -263,7 +263,8 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnHyphenButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Set hyphen
+            this.separatorComboBox.Text = "-";
         }
 
         /// <summary>
