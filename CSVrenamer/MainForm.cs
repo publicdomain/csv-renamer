@@ -274,7 +274,8 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnUnderscoreButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Set underscore
+            this.separatorComboBox.Text = "_";
         }
 
         /// <summary>
