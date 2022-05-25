@@ -286,7 +286,8 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnSeparatorComboBoxTextChanged(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Update status
+            this.separatorToolStripStatusLabel.Text = this.separatorComboBox.Text;
         }
 
         /// <summary>
