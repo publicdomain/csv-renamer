@@ -10,6 +10,7 @@ namespace CSVrenamer
     using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
+    using System.Text;
     using System.Windows.Forms;
     using System.Xml.Serialization;
     using PublicDomain;
@@ -315,7 +316,151 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnRenameButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            /* Checks */
+
+            // Constant
+            if (this.constantComboBox.Text.Length == 0)
+            {
+                // Advise user
+                MessageBox.Show("Please enter constant value", "Constant", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                // Focus
+                this.constantComboBox.Focus();
+
+                // Halt flow
+                return;
+            }
+
+            // Separator
+            if (this.separatorComboBox.Text.Length == 0)
+            {
+                // Advise user
+                MessageBox.Show("Please enter separator value", "Separator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                // Focus
+                this.separatorComboBox.Focus();
+
+                // Halt flow
+                return;
+            }
+
+            // Variable
+            if (this.variableNumericUpDown.Value < this.variableNumericUpDown.Minimum || this.variableNumericUpDown.Value > this.variableNumericUpDown.Maximum)
+            {
+                // Advise user
+                MessageBox.Show("Please enter variable value", "Variable", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                // Focus
+                this.separatorComboBox.Focus();
+
+                // Halt flow
+                return;
+            }
+
+            // Files and directories
+            if (this.itemsListView.Items.Count == 0)
+            {
+                // Advise user
+                MessageBox.Show("Please add items to process", "Items", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                // Halt flow
+                return;
+            }
+
+            /* Rename */
+
+            // Prevent drawing
+            this.itemsListView.BeginUpdate();
+
+            // Success indexes
+            List<int> successIndexesList = new List<int>();
+
+            // Error count
+            int errorCount = 0;
+
+            // Error log
+            StringBuilder errorLog = new StringBuilder();
+
+            // Iterate listview 
+            for (int i = 0; i < this.itemsListView.Items.Count; i++)
+            {
+                // Set item path
+                string itemPath = this.itemsListView.Items[i].Text;
+
+                // Set new name
+                string newName = $"{this.constantComboBox.Text}{this.separatorComboBox.Text}{this.variableNumericUpDown.Value}";
+
+                try
+                {
+                    // Rename
+                    if (File.GetAttributes(itemPath).HasFlag(FileAttributes.Directory))
+                    {
+                        // Directory
+                        Directory.Move(itemPath, Path.Combine(Directory.GetParent(itemPath).FullName, newName));
+                    }
+                    else
+                    {
+                        // File
+                        File.Move(itemPath, Path.Combine(Directory.GetParent(itemPath).FullName, $"{newName}{Path.GetExtension(itemPath)}"));
+                    }
+
+                    // Add index for removal from list
+                    successIndexesList.Add(i);
+                }
+                catch (Exception ex)
+                {
+                    // Raise error count
+                    errorCount++;
+
+                    // Add to error log
+                    errorLog.AppendLine($"{Environment.NewLine}{Environment.NewLine}{itemPath}{Environment.NewLine}{ex.Message}{Environment.NewLine}{Path.Combine(Directory.GetParent(itemPath).FullName, newName, Path.GetExtension(itemPath))}");
+                }
+
+                // Process "variable" field
+                if (this.subtractCheckBox.Checked)
+                {
+                    // Decrement
+                    if (this.variableNumericUpDown.Value > this.variableNumericUpDown.Minimum)
+                    {
+                        this.variableNumericUpDown.Value = this.variableNumericUpDown.Value - 1;
+                    }
+                }
+                else
+                {
+                    // Raise
+                    if (this.variableNumericUpDown.Value < this.variableNumericUpDown.Maximum)
+                    {
+                        this.variableNumericUpDown.Value = this.variableNumericUpDown.Value + 1;
+                    }
+                }
+            }
+
+            // Iterate listview backwards
+            for (int ii = this.itemsListView.Items.Count - 1; ii >= 0; ii--)
+            {
+                // Check if it's on success indexes list
+                if (successIndexesList.Contains(ii))
+                {
+                    // Remove frmo list 
+                    this.itemsListView.Items.RemoveAt(ii);
+                }
+            }
+
+            // Resume drawing
+            this.itemsListView.EndUpdate();
+
+            // Update count
+            this.itemsCountToolStripStatusLabel.Text = this.itemsListView.Items.Count.ToString();
+
+            // Check if most write error file to disk
+            if (errorLog.Length > 0)
+            {
+                // Write 
+                File.AppendAllText("CSVrenamer-ErrorLog.txt", errorLog.ToString());
+            }
+
+            // Advise user
+            MessageBox.Show($"Rename finished.{Environment.NewLine}{(errorCount == 0 ? "No" : errorCount.ToString())} errors.", "Renamed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
