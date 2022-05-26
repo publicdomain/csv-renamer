@@ -28,5 +28,35 @@ namespace PublicDomain
         /// </summary>
         /// <value><c>true</c> if always on top; otherwise, <c>false</c>.</value>
         public bool AlwaysOnTop { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the constant text.
+        /// </summary>
+        /// <value>The constant text.</value>
+        public string ConstantText { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the constant list.
+        /// </summary>
+        /// <value>The constant list.</value>
+        public List<string> ConstantList { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Gets or sets the separator text.
+        /// </summary>
+        /// <value>The separator text.</value>
+        public string SeparatorText { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the separator list.
+        /// </summary>
+        /// <value>The separator list.</value>
+        public List<string> SeparatorList { get; set; } = new List<string>();
+
+        /// <summary>
+        /// Gets or sets the variable value.
+        /// </summary>
+        /// <value>The variable value.</value>
+        private decimal variableValue { get; set; } = 1;
     }
 }

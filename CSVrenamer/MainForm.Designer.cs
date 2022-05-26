@@ -483,9 +483,6 @@ namespace CSVrenamer
         	this.separatorComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
         	this.separatorComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
         	this.separatorComboBox.FormattingEnabled = true;
-        	this.separatorComboBox.Items.AddRange(new object[] {
-        	        	        	"_",
-        	        	        	"-"});
         	this.separatorComboBox.Location = new System.Drawing.Point(105, 3);
         	this.separatorComboBox.Name = "separatorComboBox";
         	this.separatorComboBox.Size = new System.Drawing.Size(96, 24);
@@ -504,6 +501,8 @@ namespace CSVrenamer
         	this.Name = "MainForm";
         	this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         	this.Text = "CSV renamer";
+        	this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormFormClosing);
+        	this.Load += new System.EventHandler(this.MainFormLoad);
         	this.mainMenuStrip.ResumeLayout(false);
         	this.mainMenuStrip.PerformLayout();
         	this.mainStatusStrip.ResumeLayout(false);

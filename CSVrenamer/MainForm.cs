@@ -477,8 +477,24 @@ namespace CSVrenamer
                 File.AppendAllText("CSVrenamer-ErrorLog.txt", errorLog.ToString());
             }
 
+            // Check if must save edits
+            if (this.rememberEditsToolStripMenuItem.Checked)
+            {
+                // Add to constant combo box
+                if (!this.constantComboBox.Items.Contains(this.constantComboBox.Text))
+                {
+                    this.constantComboBox.Items.Add(this.constantComboBox.Text);
+                }
+
+                // Add to separator combo box
+                if (!this.separatorComboBox.Items.Contains(this.separatorComboBox.Text))
+                {
+                    this.separatorComboBox.Items.Add(this.separatorComboBox.Text);
+                }
+            }
+
             // Advise user
-            MessageBox.Show($"Rename finished.{Environment.NewLine}{(errorCount == 0 ? "No" : errorCount.ToString())} errors.", "Renamed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //#            MessageBox.Show($"Rename finished.{Environment.NewLine}{(errorCount == 0 ? "No" : errorCount.ToString())} errors.", "Renamed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -549,6 +565,26 @@ namespace CSVrenamer
 
             // Update count
             this.itemsCountToolStripStatusLabel.Text = this.itemsListView.Items.Count.ToString();
+        }
+
+        /// <summary>
+        /// Handles the main form form closing.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnMainFormFormClosing(object sender, FormClosingEventArgs e)
+        {
+            // TODO Add code
+        }
+
+        /// <summary>
+        /// Handles the main form load.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnMainFormLoad(object sender, EventArgs e)
+        {
+            // TODO Add code
         }
 
         /// <summary>
