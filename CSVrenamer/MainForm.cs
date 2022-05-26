@@ -623,6 +623,25 @@ namespace CSVrenamer
         }
 
         /// <summary>
+        /// Sets the GUI.
+        /// </summary>
+        private void SetGui()
+        {
+            // Clear
+            this.constantComboBox.Items.Clear();
+            this.separatorComboBox.Items.Clear();
+
+            // Set values
+            this.alwaysOnTopToolStripMenuItem.Checked = this.settingsData.AlwaysOnTop;
+            this.rememberEditsToolStripMenuItem.Checked = this.settingsData.RememberEdits;
+            this.constantComboBox.Text = this.settingsData.ConstantText;
+            this.constantComboBox.Items.AddRange(this.settingsData.ConstantList.ToArray<object>());
+            this.separatorComboBox.Text = this.settingsData.SeparatorText;
+            this.separatorComboBox.Items.AddRange(this.settingsData.SeparatorList.ToArray<object>());
+            this.variableNumericUpDown.Value = this.settingsData.VariableValue;
+        }
+
+        /// <summary>
         /// Handles the exit tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
