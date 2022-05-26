@@ -11,6 +11,7 @@ namespace CSVrenamer
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Windows.Forms;
     using System.Xml.Serialization;
@@ -31,12 +32,34 @@ namespace CSVrenamer
         private Icon associatedIcon = null;
 
         /// <summary>
+        /// The settings data.
+        /// </summary>
+        private SettingsData settingsData = null;
+
+        /// <summary>
+        /// The settings data path.
+        /// </summary>
+        private string settingsDataPath = $"{Application.ProductName}-SettingsData.txt";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:CSVrenamer.MainForm"/> class.
         /// </summary>
         public MainForm()
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
             this.InitializeComponent();
+
+            /* Settings data */
+
+            // Check for settings file
+            if (!File.Exists(this.settingsDataPath))
+            {
+                // Create new settings file
+                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
+            }
+
+            // Load settings from disk
+            this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
         }
 
         /// <summary>
@@ -494,7 +517,7 @@ namespace CSVrenamer
             }
 
             // Advise user
-            //#            MessageBox.Show($"Rename finished.{Environment.NewLine}{(errorCount == 0 ? "No" : errorCount.ToString())} errors.", "Renamed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Rename finished.{Environment.NewLine}{(errorCount == 0 ? "No" : errorCount.ToString())} errors.", "Renamed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -574,7 +597,19 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnMainFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            // TODO Add code
+            /* Setiings data values */
+
+            // Set values
+            this.settingsData.AlwaysOnTop = this.alwaysOnTopToolStripMenuItem.Checked;
+            this.settingsData.RememberEdits = this.rememberEditsToolStripMenuItem.Checked;
+            this.settingsData.ConstantText = this.constantComboBox.Text;
+            this.settingsData.ConstantList = this.constantComboBox.Items.Cast<Object>().Select(item => item.ToString()).ToList<string>();
+            this.settingsData.SeparatorText = this.separatorComboBox.Text;
+            this.settingsData.SeparatorList = this.separatorComboBox.Items.Cast<Object>().Select(item => item.ToString()).ToList<string>();
+            this.settingsData.VariableValue = this.variableNumericUpDown.Value;
+
+            // Save settings data to disk
+            this.SaveSettingsFile(this.settingsDataPath, this.settingsData);
         }
 
         /// <summary>

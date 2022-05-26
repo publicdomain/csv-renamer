@@ -27,7 +27,13 @@ namespace PublicDomain
         /// Gets or sets a value indicating whether this <see cref="T:PublicDomain.SettingsData"/> always on top.
         /// </summary>
         /// <value><c>true</c> if always on top; otherwise, <c>false</c>.</value>
-        public bool AlwaysOnTop { get; set; } = false;
+        public bool AlwaysOnTop { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:PublicDomain.SettingsData"/> remember edits.
+        /// </summary>
+        /// <value><c>true</c> if remember edits; otherwise, <c>false</c>.</value>
+        public bool RememberEdits { get; set; } = true;
 
         /// <summary>
         /// Gets or sets the constant text.
@@ -57,6 +63,6 @@ namespace PublicDomain
         /// Gets or sets the variable value.
         /// </summary>
         /// <value>The variable value.</value>
-        private decimal variableValue { get; set; } = 1;
+        public decimal VariableValue { get; set; } = 1;
     }
 }
