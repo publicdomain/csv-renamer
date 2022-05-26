@@ -60,6 +60,9 @@ namespace CSVrenamer
 
             // Load settings from disk
             this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
+
+            // Load settings data to GUI
+            this.SetGui();
         }
 
         /// <summary>
@@ -619,7 +622,8 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnMainFormLoad(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Set topmost
+            this.TopMost = this.settingsData.AlwaysOnTop;
         }
 
         /// <summary>
