@@ -237,7 +237,21 @@ namespace CSVrenamer
         /// <param name="e">Event arguments.</param>
         private void OnResetToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Ask user
+            if (MessageBox.Show("Would you like to reset ALL saved settings?", "Reset", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                // Clear list
+                this.itemsListView.Items.Clear();
+
+                // Create new settings file
+                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
+
+                // Load settings from disk
+                this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
+
+                // Load settings data into GUI
+                this.SetGui();
+            }
         }
 
         /// <summary>
