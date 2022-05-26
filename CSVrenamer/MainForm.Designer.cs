@@ -111,7 +111,7 @@ namespace CSVrenamer
         	this.newToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
         	this.newToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
         	this.newToolStripMenuItem1.Text = "&New";
-        	this.newToolStripMenuItem1.Click += new System.EventHandler(this.OnNewToolStripMenuItem1Click);
+        	this.newToolStripMenuItem1.Click += new System.EventHandler(this.OnNewToolStripMenuItemClick);
         	// 
         	// toolStripSeparator3
         	// 

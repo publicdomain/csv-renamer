@@ -181,13 +181,26 @@ namespace CSVrenamer
         }
 
         /// <summary>
-        /// Handles the new tool strip menu item1 click.
+        /// Handles the new tool strip menu item click.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
-        private void OnNewToolStripMenuItem1Click(object sender, EventArgs e)
+        private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Clear constant
+            this.constantComboBox.Text = string.Empty;
+
+            // Clear separator
+            this.separatorComboBox.Text = string.Empty;
+
+            // Reset variable
+            this.variableNumericUpDown.Value = 1;
+
+            // Clear list items
+            this.itemsListView.Items.Clear();
+
+            // Focus
+            this.constantComboBox.Focus();
         }
 
         /// <summary>
