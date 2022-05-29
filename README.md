@@ -2,6 +2,8 @@
 
 A mass renamer with three parameters: C = constant, S = separator, V = variable.
 
+![CSVrenamer_v0-1-0](https://user-images.githubusercontent.com/54631779/170849668-4e6dd5bb-1490-4824-bdbb-e520b9a6fd7a.png)
+
 Made for **magician62** from [donationcoder.com](https://www.donationcoder.com).
 
 Original thread: [IDEA: Drag and Drop Rename](https://www.donationcoder.com/forum/index.php?topic=51781.0)
